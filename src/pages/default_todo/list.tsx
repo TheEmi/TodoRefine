@@ -8,6 +8,7 @@ import {
   useForm,
 } from "@refinedev/antd";
 import {
+  BaseKey,
   useList,
   useMany,
   useOne,
@@ -41,7 +42,7 @@ export const Default_todo = () => {
         });
         mutate({
           resource: "default_todo",
-          id: data?.data[0].id,
+          id: data?.data[0].id as BaseKey,
           values: { defaults: { items: newDefaults } },
         });
       });

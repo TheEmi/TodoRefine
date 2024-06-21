@@ -8,6 +8,7 @@ import {
   useForm,
 } from "@refinedev/antd";
 import {
+  BaseKey,
   useCreate,
   useList,
   useMany,
@@ -67,7 +68,7 @@ export const TodayTodo = () => {
     form.setFieldsValue({ defaults: newItems });
     mutate({
       resource: "todo",
-      id: dataId,
+      id: dataId as BaseKey,
       values: { todo: { items: newItems } },
     });
   };
@@ -80,7 +81,7 @@ export const TodayTodo = () => {
         });
         mutate({
           resource: "todo",
-          id: dataId,
+          id: dataId as BaseKey,
           values: { todo: { items: newDefaults } },
         });
         setIsEditing(false);
