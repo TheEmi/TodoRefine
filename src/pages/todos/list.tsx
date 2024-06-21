@@ -66,11 +66,12 @@ export const TodayTodo = () => {
         return item;
       });
     form.setFieldsValue({ defaults: newItems });
-    mutate({
-      resource: "todo",
-      id: dataId as BaseKey,
-      values: { todo: { items: newItems } },
-    });
+    if(dataId !== undefined)
+      mutate({
+        resource: "todo",
+        id: dataId as BaseKey,
+        values: { todo: { items: newItems } },
+      });
   };
 
   const saveChanges = () => {

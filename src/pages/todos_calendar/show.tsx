@@ -10,6 +10,7 @@ import {
   Title,
 } from "@refinedev/antd";
 import {
+  BaseKey,
   useCreate,
   useList,
   useMany,
@@ -71,11 +72,12 @@ export const SpecificTodo = ({ day, returnToCalendar }: Todo) => {
         return item;
       });
     form.setFieldsValue({ defaults: newItems });
-    mutate({
-      resource: "todo",
-      id: dataId,
-      values: { todo: { items: newItems } },
-    });
+    if(dataId !== undefined)
+      mutate({
+        resource: "todo",
+        id: dataId as BaseKey,
+        values: { todo: { items: newItems } },
+      });
   };
 
   const saveChanges = () => {
@@ -84,11 +86,12 @@ export const SpecificTodo = ({ day, returnToCalendar }: Todo) => {
         let newDefaults = form.getFieldValue("defaults").map((item: any) => {
           return { name: item.name, checked: false };
         });
-        mutate({
-          resource: "todo",
-          id: dataId,
-          values: { todo: { items: newDefaults } },
-        });
+        if(dataId !== undefined)
+          mutate({
+            resource: "todo",
+            id: dataId as BaseKey,
+            values: { todo: { items: newDefaults } },
+          });
         setIsEditing(false);
       });
     } catch (e) {

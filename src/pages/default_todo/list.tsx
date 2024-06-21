@@ -40,11 +40,12 @@ export const Default_todo = () => {
         let newDefaults = form.getFieldValue("defaults").map((item: any) => {
           return { name: item.name, checked: false };
         });
-        mutate({
-          resource: "default_todo",
-          id: data?.data[0].id as BaseKey,
-          values: { defaults: { items: newDefaults } },
-        });
+        if(data?.data[0].id !== undefined)
+          mutate({
+            resource: "default_todo",
+            id: data?.data[0].id as BaseKey,
+            values: { defaults: { items: newDefaults } },
+          });
       });
     } catch (e) {
       console.log(e);
